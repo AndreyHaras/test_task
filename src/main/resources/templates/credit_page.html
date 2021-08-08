@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title th:text="#{Customer}"></title>
-    <link rel="stylesheet" href="/projectsetting.css">
+    <title th:text="#{Credit}"></title>
+    <link rel="stylesheet" href="/test_task_project.css">
 </head>
 <body>
 <div class="container">
     <header class="header">
         <nav class="header-nav">
             <div class="header-logo">
-                <h3 th:text="#{Customer}"></h3>
+                <h3 th:text="#{Credit}"></h3>
             </div>
             <ul class="header-nav-list">
                 <li>
@@ -36,41 +36,25 @@
     <br/>
     <div class="content-table">
         <div class="content-header">
-            <h2 th:text="#{Add.new.customer}"></h2>
+            <h2 th:text="#{Add.new.credit}"></h2>
         </div>
-        <form th:action="@{/add/}" method="POST" class="content-add" th:object="${new_customer}">
+        <form th:action="@{/credit/add/}" method="POST" class="content-add" th:object="${new_credit}">
             <div class="content-fields">
                 <div>
-                    <p th:text="#{Enter.your.fully.aualified.name}"></p>
-                    <p th:if="${#fields.hasErrors('fullyQualifiedName')}" th:class="${#fields.hasErrors('fullyQualifiedName')} ? error"
-                       th:errors="*{fullyQualifiedName}">Error</p>
-                    <input id="fullyQualifiedName" type="text"
-                           name="fullyQualifiedName"
-                           th:value="${new_customer.fullyQualifiedName}"/>
+                    <p th:text="#{Enter.credit.limit}"></p>
+                    <p th:if="${#fields.hasErrors('creditLimit')}" th:class="${#fields.hasErrors('creditLimit')} ? error"
+                       th:errors="*{creditLimit}">Error</p>
+                    <input id="creditLimit" type="text"
+                           name="creditLimit"
+                           th:value="${new_credit.creditLimit}"/>
                 </div>
                 <div>
-                    <p th:text="#{Enter.your.phone.number}"></p>
-                    <p th:if="${#fields.hasErrors('phoneNumber')}" th:class="${#fields.hasErrors('phoneNumber')} ? error"
-                       th:errors="*{phoneNumber}">Error</p>
-                    <input id="phoneNumber" type="text"
-                           name="phoneNumber"
-                           th:value="${new_customer.phoneNumber}"/>
-                </div>
-                <div>
-                    <p th:text="#{Enter.email}"></p>
-                    <p th:if="${#fields.hasErrors('email')}" th:class="${#fields.hasErrors('email')} ? error"
-                       th:errors="*{email}">Error</p>
-                    <input id="email" type="text"
-                           name="email"
-                           th:value="${new_customer.email}"/>
-                </div>
-                <div>
-                    <p th:text="#{Enter.passport.number}"></p>
-                    <p th:if="${#fields.hasErrors('passportNumber')}" th:class="${#fields.hasErrors('passportNumber')} ? error"
-                       th:errors="*{passportNumber}">Error</p>
-                    <input id="passportNumber" type="text"
-                           name="passportNumber"
-                           th:value="${new_customer.passportNumber}"/>
+                    <p th:text="#{Enter.interest.rate}"></p>
+                    <p th:if="${#fields.hasErrors('interestRate')}" th:class="${#fields.hasErrors('interestRate')} ? error"
+                       th:errors="*{interestRate}">Error</p>
+                    <input id="interestRate" type="text"
+                           name="interestRate"
+                           th:value="${new_credit.interestRate}"/>
                 </div>
             </div>
             <div class="content-fields">
@@ -85,24 +69,20 @@
     </div>
     <div class="content-table">
         <div class="content-header">
-            <h2 th:text="#{Customer.information}"></h2>
+            <h2 th:text="#{Credit.information}"></h2>
         </div>
         <table>
             <thead>
-            <th th:text="#{Fully.aualified.name}"></th>
-            <th th:text="#{Email}"></th>
-            <th th:text="#{Phone.number}"></th>
-            <th th:text="#{Passport.number}"></th>
+            <th th:text="#{Credit.limit}"></th>
+            <th th:text="#{Interest.rate}"></th>
             <th>Действие</th>
             </thead>
-            <tbody th:each="customer : ${customer_list}">
-            <td th:utext="${customer.getFullyQualifiedName()}"></td>
-            <td th:utext="${customer.getEmail()}"></td>
-            <td th:utext="${customer.getPhoneNumber()}"></td>
-            <td th:utext="${customer.getPassportNumber()}"></td>
+            <tbody th:each="credit : ${credit_list}">
+            <td th:utext="${credit.getCreditLimit()}"></td>
+            <td th:utext="${credit.getInterestRate()}"></td>
             <td>
                 <a onclick="return confirm('Вы действительно хотите удалить запись')"
-                   th:href="@{/delete/{id}(id=${customer.getId()})}" th:text="#{Delete}"></a>
+                   th:href="@{/credit/delete/{id}(id=${credit.getId()})}" th:text="#{Delete}"></a>
             </td>
             </tbody>
         </table>

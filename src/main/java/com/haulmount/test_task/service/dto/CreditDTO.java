@@ -10,13 +10,13 @@ public class CreditDTO {
     private UUID id;
 
     @NotNull
-    @Size(min = 5, max = 10, message = "must be between 5 and 10 characters")
-    @Pattern(regexp = "[0-9]", message = "only numbers available")
-    private double creditLimit;
+    @Size(min = 5, max = 11, message = "must be between 5 and 11")
+    @Pattern(regexp = "^[0-9]+$")
+    private String creditLimit;
 
     @NotNull
-    @Size(min = 2, max = 5, message = "must be between 2 and 5")
-    private double interestRate;
+    @Size(min = 2, max = 6, message = "must be between 2 and 6")
+    private String interestRate;
 
     public CreditDTO() {
     }
@@ -29,19 +29,40 @@ public class CreditDTO {
         this.id = id;
     }
 
-    public double getCreditLimit() {
+    public String getCreditLimit() {
         return creditLimit;
     }
 
-    public void setCreditLimit(double creditLimit) {
+    public void setCreditLimit(String creditLimit) {
         this.creditLimit = creditLimit;
     }
 
-    public double getInterestRate() {
+    public String getInterestRate() {
         return interestRate;
     }
 
-    public void setInterestRate(double interestRate) {
+    public void setInterestRate(String interestRate) {
         this.interestRate = interestRate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CreditDTO creditDTO = (CreditDTO) o;
+
+        if (id != null ? !id.equals(creditDTO.id) : creditDTO.id != null) return false;
+        if (creditLimit != null ? !creditLimit.equals(creditDTO.creditLimit) : creditDTO.creditLimit != null)
+            return false;
+        return interestRate != null ? interestRate.equals(creditDTO.interestRate) : creditDTO.interestRate == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (creditLimit != null ? creditLimit.hashCode() : 0);
+        result = 31 * result + (interestRate != null ? interestRate.hashCode() : 0);
+        return result;
     }
 }

@@ -15,7 +15,7 @@
   justify-content: space-around;
   align-items: center;
   min-height: 10vh;
-  background-color: aqua;
+  background-color: #246777;
   font-family: "Times New Roman", Times, serif;
 }
 
@@ -79,7 +79,7 @@
 }
 
 .header-nav-sabmenu-list > li {
-  background-color: aqua;
+  background-color: #729951;
   display: inline-block;
   padding: 5px 10px;
   min-width: 250px;
@@ -178,7 +178,7 @@
 }
 
 button {
-  background-color: aqua;
+  background-color: #246777;
   border: none;
   color: white;
   padding: 8px 16px;
@@ -207,7 +207,7 @@ button {
 }
 
 .content-table thead tr {
-  background-color: aqua;
+  background-color: #246777;
   color: #ffffff;
   text-align: left;
   font-weight: bold;
@@ -227,12 +227,12 @@ button {
 }
 
 .content-table tbody tr:last-of-type {
-  border-bottom: 2px solid aqua;
+  border-bottom: 2px solid #729951;
 }
 
 .content-table tbody tr.active-row {
   font-weight: bold;
-  color: aqua;
+  color: #729951;
 }
 
 .content-table a {

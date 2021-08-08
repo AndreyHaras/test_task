@@ -21,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public boolean checkCredit(UUID customerId) {
+    public boolean checkCustomerOnCredit(UUID customerId) {
         Optional<Customer> customerCheckOnCredit = repository.findById(customerId);
         return customerCheckOnCredit.get().getBank() != null;
     }

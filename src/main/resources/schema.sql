@@ -9,8 +9,8 @@ CREATE TABLE customer (
 
 CREATE TABLE credit (
                         id UUID NOT NULL,
-                        credit_limit decimal(14,4) NOT NULL,
-                        interest_rate decimal(4,2) NOT NULL,
+                        credit_limit VARCHAR(10) NOT NULL,
+                        interest_rate VARCHAR(5) NOT NULL,
                         PRIMARY KEY (id)
 );
 
@@ -49,10 +49,10 @@ VALUES ('14878326-b111-42bf-a553-f74dd0bc0fa3', 'Иванов Александр
        ('8cc3defc-4f22-4d02-b0f9-43cf3323270b', 'Тринкер Борис Давидович', '89857114802', 'BorisRazor@yandex.ru', '4445140932');
 
 INSERT INTO CREDIT (id, credit_limit , interest_rate)
-VALUES ('3214a019-9502-4f89-9908-fd30fba46b96',600000, 15.75),
-       ('34118da5-3b69-2209-a3c9-ded1dgf80abf', 350000, 18.40),
-       ('35548da5-3789-2209-acc9-ded1dgf80abf', 1000000, 11.40),
-       ('8aa3defc-4f82-4402-b0f9-43cf2123270b', 800000, 12.40);
+VALUES ('3214a019-9502-4f89-9908-fd30fba46b96','600000', '15.75'),
+       ('34118da5-3b69-2209-a3c9-ded1dgf80abf', '350000', '18.40'),
+       ('35548da5-3789-2209-acc9-ded1dgf80abf', '1000000', '11.40'),
+       ('8aa3defc-4f82-4402-b0f9-43cf2123270b', '800000', '12.40');
 
 INSERT INTO bank (id, uuid_customer, uuid_credit)
 VALUES ('8gg3defc-4f22-4d02-b0f9-43cf3323270b', '1b50843d-9771-4351-9860-d3bc8800573a', '34118da5-3b69-2209-a3c9-ded1dgf80abf'),

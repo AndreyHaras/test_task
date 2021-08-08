@@ -10,6 +10,9 @@ public class BankDTO {
     private UUID idCustomer;
     private UUID idCredit;
 
+    public BankDTO() {
+    }
+
     public UUID getId() {
         return id;
     }

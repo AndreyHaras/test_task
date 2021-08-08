@@ -16,11 +16,14 @@ public class Credit {
     )
     private UUID id;
 
-    @Column(name = "credit_limit", length = 14)
-    private double creditLimit;
+    @Column(name = "credit_limit", length = 10)
+    private String creditLimit;
 
-    @Column(name = "interest_rate", length = 4)
-    private double interestRate;
+    @Column(name = "interest_rate", length = 5)
+    private String interestRate;
+
+    @OneToOne(mappedBy = "credit")
+    private Bank bank;
 
     public Credit() {
     }
@@ -33,19 +36,47 @@ public class Credit {
         this.id = id;
     }
 
-    public double getCreditLimit() {
+    public String getCreditLimit() {
         return creditLimit;
     }
 
-    public void setCreditLimit(double creditLimit) {
+    public void setCreditLimit(String creditLimit) {
         this.creditLimit = creditLimit;
     }
 
-    public double getInterestRate() {
+    public String getInterestRate() {
         return interestRate;
     }
 
-    public void setInterestRate(double interestRate) {
+    public void setInterestRate(String interestRate) {
         this.interestRate = interestRate;
+    }
+
+    public Bank getBank() {
+        return bank;
+    }
+
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Credit credit = (Credit) o;
+
+        if (id != null ? !id.equals(credit.id) : credit.id != null) return false;
+        if (creditLimit != null ? !creditLimit.equals(credit.creditLimit) : credit.creditLimit != null) return false;
+        return interestRate != null ? interestRate.equals(credit.interestRate) : credit.interestRate == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (creditLimit != null ? creditLimit.hashCode() : 0);
+        result = 31 * result + (interestRate != null ? interestRate.hashCode() : 0);
+        return result;
     }
 }

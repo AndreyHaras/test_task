@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface CustomerService  {
 
-    boolean checkCredit(UUID customerId);
+    boolean checkCustomerOnCredit(UUID customerId);
     List<CustomerDTO> findAll();
     Customer save(CustomerDTO customer);
     void delete(UUID customerId);
