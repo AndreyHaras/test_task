@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -19,21 +21,27 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public boolean checkCredit(UUID customerId) {
+        Optional<Customer> customerCheckOnCredit = repository.findById(customerId);
+        return customerCheckOnCredit.get().getBank() != null;
+    }
+
+    @Override
     public List<CustomerDTO> findAll() {
-        return createCustomersList(repository.findAll());
+        return createCustomerList(repository.findAll());
     }
 
     @Override
-    public void save(CustomerDTO customer) {
-        repository.save(customerToDb(customer));
+    public Customer save(CustomerDTO customer) {
+        return repository.save(customerToDb(customer));
     }
 
     @Override
-    public void delete(CustomerDTO customer) {
-        repository.delete(customerToDelete(customer));
+    public void delete(UUID customerId) {
+        repository.deleteById(customerId);
     }
 
-    private List<CustomerDTO> createCustomersList(List<Customer> customers){
+    private List<CustomerDTO> createCustomerList(List<Customer> customers){
         List<CustomerDTO> result = new ArrayList<>();
         for (Customer customer : customers){
             CustomerDTO newCustomer = new CustomerDTO();
@@ -54,15 +62,5 @@ public class CustomerServiceImpl implements CustomerService {
         customerToDb.setPassportNumber(customer.getPassportNumber());
         customerToDb.setEmail(customer.getEmail());
         return customerToDb;
-    }
-
-    private Customer customerToDelete(CustomerDTO customer){
-        Customer customerToDelete = new Customer();
-        customerToDelete.setFullyQualifiedName(customer.getFullyQualifiedName());
-        customerToDelete.setPhoneNumber(customer.getPhoneNumber());
-        customerToDelete.setPassportNumber(customer.getPassportNumber());
-        customerToDelete.setEmail(customer.getEmail());
-        customerToDelete.setId(customer.getId());
-        return customerToDelete;
     }
 }

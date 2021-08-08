@@ -18,4 +18,15 @@ class CustomerRepositoryTest extends Activeprofile {
             System.out.println(customer.getFullyQualifiedName());
         }
     }
+    @Test
+    public void isSave(){
+        Customer customer = new Customer();
+        customer.setEmail("IvanovAlex@mail.com");
+        customer.setFullyQualifiedName("Крюкова Ольга Петровна");
+        customer.setPassportNumber("4445140932");
+        customer.setPhoneNumber("89269389520");
+        Customer newCustomer = customerRepository.save(customer);
+        System.out.println(newCustomer.getId());
+        System.out.println(customerRepository.findAll().size());
+    }
 }

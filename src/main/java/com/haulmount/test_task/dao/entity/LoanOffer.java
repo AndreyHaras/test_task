@@ -19,16 +19,13 @@ public class LoanOffer {
     private UUID id;
 
     @Column(name = "uuid_customer")
-    private UUID clientId;
+    private UUID customerId;
 
     @Column(name = "uuid_credit")
     private UUID creditId;
 
     @Column(name = "credit_amount")
     private double CreditAmount;
-
-    @Column(name = "payment_schedule_id")
-    private UUID paymentScheduleId;
 
     @OneToMany(mappedBy = "loanOffer", fetch = FetchType.LAZY)
     private List<PaymentSchedule> paymentSchedules;
@@ -54,12 +51,12 @@ public class LoanOffer {
         this.id = id;
     }
 
-    public UUID getClientId() {
-        return clientId;
+    public UUID getCustomerId() {
+        return customerId;
     }
 
-    public void setClientId(UUID clientId) {
-        this.clientId = clientId;
+    public void setCustomerId(UUID customerId) {
+        this.customerId = customerId;
     }
 
     public UUID getCreditId() {
@@ -76,14 +73,6 @@ public class LoanOffer {
 
     public void setCreditAmount(double creditAmount) {
         CreditAmount = creditAmount;
-    }
-
-    public UUID getPaymentScheduleId() {
-        return paymentScheduleId;
-    }
-
-    public void setPaymentScheduleId(UUID paymentScheduleId) {
-        this.paymentScheduleId = paymentScheduleId;
     }
 
     public List<PaymentSchedule> getPaymentSchedules() {

@@ -15,15 +15,15 @@ public class CustomerDTO {
             message = "must be between 10 and 120 characters")
     private String fullyQualifiedName;
 
-    @NotNull
-    @Pattern(regexp = "[0-9]")
+    @NotNull(message = "must not be null")
+    @Pattern(regexp = "^[0-9]+$")
     private String phoneNumber;
 
     @NotNull
     @Email(message = "Email should be valid")
     private String email;
 
-    @Pattern(regexp = "[0-9]")
+    @Pattern(regexp = "^[0-9]+$")
     @Size(min = 10, message = "must be 10 character")
     private String passportNumber;
 

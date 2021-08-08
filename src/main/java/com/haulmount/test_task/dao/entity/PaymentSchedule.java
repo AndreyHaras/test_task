@@ -22,16 +22,16 @@ public class PaymentSchedule {
     private UUID loanOfferId;
 
     @Column(name = "date_of_pay")
-    private Date dateOfPay;
+    private String dateOfPay;
 
-    @Column(name = "mouthly_payment")
-    private double monthlyPayment;
+    @Column(name = "monthly_payment")
+    private String monthlyPayment;
 
     @Column(name = "principal_paid")
-    private double principalPaid;
+    private String principalPaid;
 
     @Column(name = "interest_paid")
-    private double interestPaid;
+    private String interestPaid;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "loan_offer_id", updatable = false, insertable = false)
@@ -56,35 +56,35 @@ public class PaymentSchedule {
         this.loanOfferId = loanOfferId;
     }
 
-    public Date getDateOfPay() {
+    public String getDateOfPay() {
         return dateOfPay;
     }
 
-    public void setDateOfPay(Date dateOfPay) {
+    public void setDateOfPay(String dateOfPay) {
         this.dateOfPay = dateOfPay;
     }
 
-    public double getMonthlyPayment() {
+    public String getMonthlyPayment() {
         return monthlyPayment;
     }
 
-    public void setMonthlyPayment(double monthlyPayment) {
+    public void setMonthlyPayment(String monthlyPayment) {
         this.monthlyPayment = monthlyPayment;
     }
 
-    public double getPrincipalPaid() {
+    public String getPrincipalPaid() {
         return principalPaid;
     }
 
-    public void setPrincipalPaid(double principalPaid) {
+    public void setPrincipalPaid(String principalPaid) {
         this.principalPaid = principalPaid;
     }
 
-    public double getInterestPaid() {
+    public String getInterestPaid() {
         return interestPaid;
     }
 
-    public void setInterestPaid(double interestPaid) {
+    public void setInterestPaid(String interestPaid) {
         this.interestPaid = interestPaid;
     }
 

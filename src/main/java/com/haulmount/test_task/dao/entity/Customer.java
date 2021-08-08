@@ -28,6 +28,9 @@ public class Customer {
     @Column(name = "passport_number", length = 10, nullable = false)
     private String passportNumber;
 
+    @OneToOne(mappedBy = "customer")
+    private Bank bank;
+
     public Customer() {
     }
 
@@ -69,5 +72,13 @@ public class Customer {
 
     public void setPassportNumber(String passportNumber) {
         this.passportNumber = passportNumber;
+    }
+
+    public Bank getBank() {
+        return bank;
+    }
+
+    public void setBank(Bank bank) {
+        this.bank = bank;
     }
 }
