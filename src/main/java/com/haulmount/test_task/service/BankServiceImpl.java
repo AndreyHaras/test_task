@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class BankServiceImpl implements BankService {
@@ -33,8 +34,8 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    public void delete(BankDTO bank) {
-        repository.delete(bankToDelete(bank));
+    public void delete(UUID bankId) {
+        repository.deleteById(bankId);
     }
 
     private List<BankDTO> createBankList(List<Bank> banks){
@@ -44,8 +45,6 @@ public class BankServiceImpl implements BankService {
             newBank.setId(bank.getId());
             newBank.setCredit(createCreditDto(bank.getCredit()));
             newBank.setCustomer(createCustomerDto(bank.getCustomer()));
-            newBank.setIdCredit(bank.getIdCredit());
-            newBank.setIdCustomer(bank.getIdCustomer());
             result.add(newBank);
         }
         return result;
@@ -53,17 +52,9 @@ public class BankServiceImpl implements BankService {
 
     private Bank bankToDb(BankDTO bank){
         Bank bankToDb = new Bank();
-        bankToDb.setIdCredit(bank.getIdCredit());
-        bankToDb.setIdCustomer(bank.getIdCustomer());
+        bankToDb.setIdCredit(bank.getCredit_id());
+        bankToDb.setIdCustomer(bank.getCustomer_id());
         return bankToDb;
-    }
-
-    private Bank bankToDelete(BankDTO bank){
-        Bank bankToDelete = new Bank();
-        bankToDelete.setId(bank.getId());
-        bankToDelete.setIdCustomer(bank.getIdCustomer());
-        bankToDelete.setIdCredit(bank.getIdCredit());
-        return bankToDelete;
     }
 
     private CreditDTO createCreditDto(Credit credit){

@@ -75,13 +75,13 @@
             <thead>
             <th th:text="#{Credit.limit}"></th>
             <th th:text="#{Interest.rate}"></th>
-            <th>Действие</th>
+            <th th:text="#{Action}"></th>
             </thead>
             <tbody th:each="credit : ${credit_list}">
             <td th:utext="${credit.getCreditLimit()}"></td>
             <td th:utext="${credit.getInterestRate()}"></td>
             <td>
-                <a onclick="return confirm('Вы действительно хотите удалить запись')"
+                <a onclick="return confirm('Вы действительно хотите удалить запись?')"
                    th:href="@{/credit/delete/{id}(id=${credit.getId()})}" th:text="#{Delete}"></a>
             </td>
             </tbody>

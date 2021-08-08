@@ -22,12 +22,12 @@ public class Bank {
     @Column(name = "uuid_credit")
     private UUID idCredit;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "uuid_customer",
             referencedColumnName = "id", insertable = false,updatable = false)
     private Customer customer;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "uuid_credit",
             referencedColumnName = "id", insertable = false,updatable = false)
     private Credit credit;
@@ -73,5 +73,25 @@ public class Bank {
 
     public void setCredit(Credit credit) {
         this.credit = credit;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Bank bank = (Bank) o;
+
+        if (id != null ? !id.equals(bank.id) : bank.id != null) return false;
+        if (idCustomer != null ? !idCustomer.equals(bank.idCustomer) : bank.idCustomer != null) return false;
+        return idCredit != null ? idCredit.equals(bank.idCredit) : bank.idCredit == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (idCustomer != null ? idCustomer.hashCode() : 0);
+        result = 31 * result + (idCredit != null ? idCredit.hashCode() : 0);
+        return result;
     }
 }

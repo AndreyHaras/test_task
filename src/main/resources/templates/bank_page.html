@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title th:text="#{Bank}"></title>
+    <link rel="stylesheet" href="/test_task_project.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <nav class="header-nav">
+            <div class="header-logo">
+                <h3 th:text="#{Bank}"></h3>
+            </div>
+            <ul class="header-nav-list">
+                <li>
+                    <a th:href="@{/bank/}" th:text="#{Bank}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/credit/}" th:text="#{Credit}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/}" th:text="#{Customer}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/loan_offer/}" th:text="#{LoanOffer}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/payment_schedule/}" th:text="#{PaymentSchedule}"></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <br/>
+    <div class="content-table">
+        <div class="content-header">
+            <h2 th:text="#{Add.new.bank.record}"></h2>
+        </div>
+        <form th:action="@{/bank/add/}" method="POST" class="content-add" th:object="${new_bank}">
+            <div class="content-fields">
+                <div>
+                    <p th:text="#{Chose.Customer}"></p>
+                    <p th:if="${#fields.hasErrors('customer_id')}" th:class="${#fields.hasErrors('customer_id')} ? error"
+                       th:errors="*{customer_id}">Error</p>
+                    <select id="customer_id" name="customer_id">
+                        <option th:each="customer : ${customer_list}"
+                                th:value="${customer.getId()}"
+                                th:text="${customer.getFullyQualifiedName()}"
+                                th:selected="${customer.id == new_bank.customer_id}"></option>
+                    </select>
+                </div>
+                <div>
+                    <p th:text="#{Chose.Credit}"></p>
+                    <p th:if="${#fields.hasErrors('credit_id')}" th:class="${#fields.hasErrors('credit_id')} ? error"
+                       th:errors="*{credit_id}">Error</p>
+                    <select id="credit_id" name="credit_id">
+                        <option th:each="credit : ${credit_list}"
+                                th:value="${credit.getId()}"
+                                th:text="${credit.getCreditLimit()}"
+                                th:selected="${credit.id == new_bank.credit_id}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="content-fields">
+                <div class="conent-filter-button">
+                    <p th:text="#{Action}"></p>
+                    <button type="submit" th:text="#{Add}"></button>
+                    <button th:type="reset" th:text="#{Remove}"></button>
+                </div>
+            </div>
+        </form>
+        <br/>
+    </div>
+    <div class="content-table">
+        <div class="content-header">
+            <h2 th:text="#{Credit.bank.information}"></h2>
+        </div>
+        <table>
+            <thead>
+            <th th:text="#{Fully.aualified.name}"></th>
+            <th th:text="#{Passport.number}"></th>
+            <th th:text="#{Phone.number}"></th>
+            <th th:text="#{Credit.limit}"></th>
+            <th th:text="#{Interest.rate}"></th>
+            <th th:text="#{Action}"></th>
+            </thead>
+            <tbody th:each="bank : ${bank_list}">
+            <td th:utext="${bank.getCustomer().getFullyQualifiedName()}"></td>
+            <td th:utext="${bank.getCustomer().getPassportNumber()}"></td>
+            <td th:utext="${bank.getCustomer().getPhoneNumber()}"></td>
+            <td th:utext="${bank.getCredit().getCreditLimit()}"></td>
+            <td th:utext="${bank.getCredit().getInterestRate()}"></td>
+            <td>
+                <a onclick="return confirm('Вы действительно хотите удалить запись о кредите?')"
+                   th:href="@{/bank/delete/{id}(id=${bank.getId()})}" th:text="#{Delete}"></a>
+            </td>
+            </tbody>
+        </table>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <p th:text="#{Footer}"></p>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

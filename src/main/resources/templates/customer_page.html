@@ -93,7 +93,7 @@
             <th th:text="#{Email}"></th>
             <th th:text="#{Phone.number}"></th>
             <th th:text="#{Passport.number}"></th>
-            <th>Действие</th>
+            <th th:text="#{Action}"></th>
             </thead>
             <tbody th:each="customer : ${customer_list}">
             <td th:utext="${customer.getFullyQualifiedName()}"></td>
@@ -101,7 +101,7 @@
             <td th:utext="${customer.getPhoneNumber()}"></td>
             <td th:utext="${customer.getPassportNumber()}"></td>
             <td>
-                <a onclick="return confirm('Вы действительно хотите удалить запись')"
+                <a onclick="return confirm('Вы действительно хотите удалить запись?')"
                    th:href="@{/delete/{id}(id=${customer.getId()})}" th:text="#{Delete}"></a>
             </td>
             </tbody>

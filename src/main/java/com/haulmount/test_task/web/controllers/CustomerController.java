@@ -44,8 +44,7 @@ public class CustomerController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String customerDelete(@PathVariable("id") UUID cusstomerId){
         if(service.checkCustomerOnCredit(cusstomerId)){
-
-            return "redirect:/";
+            return "redirect:/bank/";
         }
         service.delete(cusstomerId);
         return "redirect:/";

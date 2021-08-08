@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
@@ -50,8 +49,7 @@ public class CreditController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteCredit(@PathVariable("id") UUID creditId){
         if(service.checkCredit(creditId)){
-
-            return "redirect:/";
+            return "redirect:/bank/";
         }
         service.delete(creditId);
         return "redirect:/credit/";

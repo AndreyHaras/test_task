@@ -1,14 +1,21 @@
 package com.haulmount.test_task.service.dto;
 
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 public class BankDTO {
 
     private UUID id;
+
+    @NotNull
+    private UUID customer_id;
+
+    @NotNull
+    private UUID credit_id;
+
     private CustomerDTO customer;
+
     private CreditDTO credit;
-    private UUID idCustomer;
-    private UUID idCredit;
 
     public BankDTO() {
     }
@@ -37,19 +44,19 @@ public class BankDTO {
         this.credit = credit;
     }
 
-    public UUID getIdCustomer() {
-        return idCustomer;
+    public UUID getCustomer_id() {
+        return customer_id;
     }
 
-    public void setIdCustomer(UUID idCustomer) {
-        this.idCustomer = idCustomer;
+    public void setCustomer_id(UUID customer_id) {
+        this.customer_id = customer_id;
     }
 
-    public UUID getIdCredit() {
-        return idCredit;
+    public UUID getCredit_id() {
+        return credit_id;
     }
 
-    public void setIdCredit(UUID idCredit) {
-        this.idCredit = idCredit;
+    public void setCredit_id(UUID credit_id) {
+        this.credit_id = credit_id;
     }
 }
