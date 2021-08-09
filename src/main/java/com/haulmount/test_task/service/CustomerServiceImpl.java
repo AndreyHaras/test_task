@@ -49,6 +49,7 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerDTO findCustomer(Optional<Customer> customerFromDb){
         Customer customer = customerFromDb.get();
         CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setId(customer.getId());
         customerDTO.setFullyQualifiedName(customer.getFullyQualifiedName());
         customerDTO.setPhoneNumber(customer.getPhoneNumber());
         customerDTO.setPassportNumber(customer.getPassportNumber());

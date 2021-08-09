@@ -88,8 +88,11 @@
                        th:value="${calculation_credit.get(0)?.getTotalPayment()}" disabled/>
             </div>
         </div>
-        <form th:action="@{/credit/add/}" method="POST" class="content-add" th:object="${loan_processing}">
+        <form th:action="@{/loan_offer/create_new/}" method="POST" class="content-add" th:object="${loan_processing}">
             <div class="content-fields">
+                <input id="creditId" type="hidden" name="creditId" th:value="${credit.id}"/>
+                <input id="customerId" type="hidden" name="customerId" th:value="${customer.id}"/>
+                <input id="currentAmount" type="hidden" name="currentAmount" th:value="${credit.creditLimit}"/>
                 <div class="conent-filter-button">
                     <p th:text="#{Action}"></p>
                     <button type="submit" th:text="#{Confirm}"></button>
@@ -97,25 +100,25 @@
             </div>
         </form>
         <br/>
-    </div>
-    <div class="content-table">
-        <div class="content-header">
-            <h2 th:text="#{Payment.information}"></h2>
+        <div class="content-table">
+            <div class="content-header">
+                <h2 th:text="#{Payment.information}"></h2>
+            </div>
+            <table>
+                <thead>
+                <th th:text="#{Date.of.pay}"></th>
+                <th th:text="#{Interest.paid}"></th>
+                <th th:text="#{Principal.paid}"></th>
+                <th th:text="#{Total.sum}"></th>
+                </thead>
+                <tbody th:each="calculation : ${calculation_credit}">
+                <td th:utext="${calculation.getDateOfPay()}"></td>
+                <td th:utext="${calculation.getInterestPaid()}"></td>
+                <td th:utext="${calculation.getPrincipalPaid()}"></td>
+                <td th:utext="${calculation.getTotalSum()}"></td>
+                </tbody>
+            </table>
         </div>
-        <table>
-            <thead>
-            <th th:text="#{Date.of.pay}"></th>
-            <th th:text="#{Interest.paid}"></th>
-            <th th:text="#{Principal.paid}"></th>
-            <th th:text="#{Total.sum}"></th>
-            </thead>
-            <tbody th:each="calculation : ${calculation_credit}">
-            <td th:utext="${calculation.getDateOfPay()}"></td>
-            <td th:utext="${calculation.getInterestPaid()}"></td>
-            <td th:utext="${calculation.getPrincipalPaid()}"></td>
-            <td th:utext="${calculation.getTotalSum()}"></td>
-            </tbody>
-        </table>
     </div>
     <footer class="footer">
         <div class="footer-content">

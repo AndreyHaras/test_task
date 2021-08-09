@@ -5,10 +5,7 @@ import com.haulmount.test_task.service.CreditService;
 import com.haulmount.test_task.service.CustomerService;
 import com.haulmount.test_task.service.LoanOfferService;
 import com.haulmount.test_task.service.PaymentScheduleService;
-import com.haulmount.test_task.service.dto.CreditDTO;
-import com.haulmount.test_task.service.dto.CustomerDTO;
-import com.haulmount.test_task.service.dto.LoanOfferDTO;
-import com.haulmount.test_task.service.dto.PaymentScheduleDTO;
+import com.haulmount.test_task.service.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,7 +61,7 @@ public class LoanOfferController {
     public String calculateNewLoanOffer(@ModelAttribute("new_loan_offer") LoanOfferDTO newLoanOffer, Model model){
         CustomerDTO customerFromDb = customerService.findById(newLoanOffer.getCustomerId());
         CreditDTO creditFromDb = creditService.findById(newLoanOffer.getCreditId());
-        LoanOfferDTO loanProcessing = createNewLoan(customerFromDb.getId(), creditFromDb.getId());
+        CalculatedDataAndId loanProcessing = new CalculatedDataAndId();
         List<PaymentScheduleDTO> calculationCredit = paymentScheduleService
                 .calculateCredit(creditFromDb.getCreditLimit(),creditFromDb.getInterestRate(),newLoanOffer.getNumberOfYears());
         model.addAttribute("customer", customerFromDb);
@@ -74,10 +71,10 @@ public class LoanOfferController {
         return "loan_offer_create_new_offer";
     }
 
-    private LoanOfferDTO createNewLoan(UUID customerId, UUID creditId){
-        LoanOfferDTO loanProcessing = new LoanOfferDTO();
-        loanProcessing.setCreditId(customerId);
-        loanProcessing.setCustomerId(creditId);
-        return loanProcessing;
+    @RequestMapping(value = "/create_new/", method = RequestMethod.POST)
+    public String createNewLoanAgreement(@ModelAttribute("loan_processing") CalculatedDataAndId loanProcessing){
+        UUID loanOfferId = loanOfferService.save(loanProcessing);
+        
+        return "redirect:/loan_offer/";
     }
 }

@@ -48,6 +48,7 @@ public class CreditServiceImpl implements CreditService {
     private CreditDTO findCredit(Optional<Credit> creditFromDb){
         Credit credit = creditFromDb.get();
         CreditDTO creditDTO = new CreditDTO();
+        creditDTO.setId(credit.getId());
         creditDTO.setCreditLimit(credit.getCreditLimit());
         creditDTO.setInterestRate(credit.getInterestRate());
         return creditDTO;

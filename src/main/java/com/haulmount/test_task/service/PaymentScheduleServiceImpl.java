@@ -39,6 +39,11 @@ public class PaymentScheduleServiceImpl implements PaymentScheduleService {
         return calculation.getResult();
     }
 
+    @Override
+    public void save(UUID loanOfferId) {
+
+    }
+
     private List<PaymentScheduleDTO> createPaymentScheduleList(List<PaymentScheduleOrderBy> paymentSchedules){
         List<PaymentScheduleDTO> result =new ArrayList<>();
         for(PaymentScheduleOrderBy payment : paymentSchedules){
