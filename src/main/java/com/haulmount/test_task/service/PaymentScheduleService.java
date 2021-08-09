@@ -7,6 +7,7 @@ import java.util.UUID;
 
 public interface PaymentScheduleService {
 
+    List<PaymentScheduleDTO> calculateCredit(String principal, String interestRate, String year);
     List<PaymentScheduleDTO> findAll();
     void delete(UUID loanOfferId);
 }

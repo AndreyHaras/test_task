@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -25,6 +26,11 @@ public class CreditServiceImpl implements CreditService {
     }
 
     @Override
+    public CreditDTO findById(UUID creditId) {
+        return findCredit(repository.findById(creditId));
+    }
+
+    @Override
     public List<CreditDTO> findAll() {
         return createCreditList(repository.findAll());
     }
@@ -37,6 +43,14 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public void delete(UUID creditId) {
         repository.deleteById(creditId);
+    }
+
+    private CreditDTO findCredit(Optional<Credit> creditFromDb){
+        Credit credit = creditFromDb.get();
+        CreditDTO creditDTO = new CreditDTO();
+        creditDTO.setCreditLimit(credit.getCreditLimit());
+        creditDTO.setInterestRate(credit.getInterestRate());
+        return creditDTO;
     }
 
     private List<CreditDTO> createCreditList(List<Credit> credits){
@@ -56,4 +70,5 @@ public class CreditServiceImpl implements CreditService {
         creditToDb.setInterestRate(credit.getInterestRate());
         return creditToDb;
     }
+
 }

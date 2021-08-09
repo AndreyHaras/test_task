@@ -8,6 +8,7 @@ import java.util.UUID;
 public interface CreditService {
 
     boolean checkCredit(UUID creditId);
+    CreditDTO findById(UUID creditId);
     List<CreditDTO> findAll();
     void save(CreditDTO credit);
     void delete(UUID creditId);

@@ -3,6 +3,7 @@ package com.haulmount.test_task.service;
 import com.haulmount.test_task.dao.entity.PaymentSchedule;
 import com.haulmount.test_task.dao.entity.PaymentScheduleOrderBy;
 import com.haulmount.test_task.dao.repository.PaymentScheduleRepository;
+import com.haulmount.test_task.service.calculationOfLoanPayment.CalculationOfLoanPayments;
 import com.haulmount.test_task.service.dto.PaymentScheduleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,14 @@ public class PaymentScheduleServiceImpl implements PaymentScheduleService {
     @Override
     public void delete(UUID loanOfferId) {
         repository.deleteByLoanOfferId(loanOfferId);
+    }
+
+    @Override
+    public List<PaymentScheduleDTO> calculateCredit(String principal, String interestRate, String year) {
+        CalculationOfLoanPayments calculation =
+                new CalculationOfLoanPayments(Double.parseDouble(principal), Double.parseDouble(interestRate), Integer.parseInt(year));
+        calculation.calculatePayment();
+        return calculation.getResult();
     }
 
     private List<PaymentScheduleDTO> createPaymentScheduleList(List<PaymentScheduleOrderBy> paymentSchedules){

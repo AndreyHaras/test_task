@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title th:text="#{LoanOffer}"></title>
-    <link rel="stylesheet" href="/test_task_project.css">
+    <link rel="stylesheet" href="/project_test_task.css">
 </head>
 <body>
 <div class="container">
@@ -38,6 +38,7 @@
         <div class="content-header">
             <h2 th:text="#{New.loan.offer}"></h2>
         </div>
+        <br/>
         <form th:action="@{/loan_offer/add/}" method="POST" class="content-add" th:object="${new_loan_offer}">
             <div class="content-fields">
                 <div>

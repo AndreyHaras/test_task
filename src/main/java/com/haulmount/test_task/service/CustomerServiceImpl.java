@@ -27,6 +27,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public CustomerDTO findById(UUID customerId) {
+        return findCustomer(repository.findById(customerId));
+    }
+
+    @Override
     public List<CustomerDTO> findAll() {
         return createCustomerList(repository.findAll());
     }
@@ -39,6 +44,16 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void delete(UUID customerId) {
         repository.deleteById(customerId);
+    }
+
+    private CustomerDTO findCustomer(Optional<Customer> customerFromDb){
+        Customer customer = customerFromDb.get();
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setFullyQualifiedName(customer.getFullyQualifiedName());
+        customerDTO.setPhoneNumber(customer.getPhoneNumber());
+        customerDTO.setPassportNumber(customer.getPassportNumber());
+        customerDTO.setEmail(customer.getEmail());
+        return customerDTO;
     }
 
     private List<CustomerDTO> createCustomerList(List<Customer> customers){
