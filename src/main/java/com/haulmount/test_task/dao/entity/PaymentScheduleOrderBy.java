@@ -1,7 +1,9 @@
 package com.haulmount.test_task.dao.entity;
 
+import java.time.LocalDate;
+
 public interface PaymentScheduleOrderBy {
-    String getDateOfPay();
+    LocalDate getDateOfPay();
     String getMonthlyPayment();
     String getPrincipalPaid();
     String getInterestPaid();

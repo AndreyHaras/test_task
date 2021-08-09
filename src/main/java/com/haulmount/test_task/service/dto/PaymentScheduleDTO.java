@@ -1,12 +1,13 @@
 package com.haulmount.test_task.service.dto;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class PaymentScheduleDTO {
 
     private UUID loanOfferId;
 
-    private String dateOfPay;
+    private LocalDate dateOfPay;
 
     private String monthlyPayment;
 
@@ -29,11 +30,11 @@ public class PaymentScheduleDTO {
         this.loanOfferId = loanOfferId;
     }
 
-    public String getDateOfPay() {
+    public LocalDate getDateOfPay() {
         return dateOfPay;
     }
 
-    public void setDateOfPay(String dateOfPay) {
+    public void setDateOfPay(LocalDate dateOfPay) {
         this.dateOfPay = dateOfPay;
     }
 

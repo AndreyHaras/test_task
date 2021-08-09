@@ -3,6 +3,7 @@ package com.haulmount.test_task.dao.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -22,7 +23,7 @@ public class PaymentSchedule {
     private UUID loanOfferId;
 
     @Column(name = "date_of_pay")
-    private String dateOfPay;
+    private LocalDate dateOfPay;
 
     @Column(name = "monthly_payment")
     private String monthlyPayment;
@@ -56,11 +57,11 @@ public class PaymentSchedule {
         this.loanOfferId = loanOfferId;
     }
 
-    public String getDateOfPay() {
+    public LocalDate getDateOfPay() {
         return dateOfPay;
     }
 
-    public void setDateOfPay(String dateOfPay) {
+    public void setDateOfPay(LocalDate dateOfPay) {
         this.dateOfPay = dateOfPay;
     }
 

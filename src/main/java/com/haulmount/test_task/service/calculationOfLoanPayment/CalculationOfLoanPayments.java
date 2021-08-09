@@ -3,6 +3,7 @@ package com.haulmount.test_task.service.calculationOfLoanPayment;
 import com.haulmount.test_task.service.dto.PaymentScheduleDTO;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 public class CalculationOfLoanPayments {
@@ -30,10 +31,9 @@ public class CalculationOfLoanPayments {
         monthlyPayment = monthlyPayment(principal, monthlyInterestRate, numberOfYear);
         for (month = 1; month <= totalMonths; month++) {
             PaymentScheduleDTO calculateData= new PaymentScheduleDTO();
-            Date date = new Date();
-            SimpleDateFormat ft = new SimpleDateFormat("MM-dd-YYYY");
+            LocalDate localDate = LocalDate.now();
             if(month != 1){
-                date = DateUtil.addDays(date, 30 * month);
+                localDate = localDate.plusDays(month * 30);
             }
             interestPaid  = principal      * (monthlyInterestRate / 100);
             principalPaid = monthlyPayment - interestPaid;
@@ -41,7 +41,7 @@ public class CalculationOfLoanPayments {
 
             calculateData.setMonthlyPayment(decimalFormat.format(monthlyPayment));
             calculateData.setTotalPayment(decimalFormat.format(monthlyPayment*totalMonths));
-            calculateData.setDateOfPay(ft.format(date));
+            calculateData.setDateOfPay(localDate);
             calculateData.setInterestPaid(decimalFormat.format(interestPaid));
             calculateData.setPrincipalPaid(decimalFormat.format(principalPaid));
             calculateData.setTotalSum(decimalFormat.format(newBalance));
