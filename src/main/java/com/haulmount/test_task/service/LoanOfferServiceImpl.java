@@ -1,16 +1,10 @@
 package com.haulmount.test_task.service;
 
 import com.haulmount.test_task.dao.entity.LoanOffer;
-import com.haulmount.test_task.dao.repository.CreditRepository;
-import com.haulmount.test_task.dao.repository.CustomerRepository;
 import com.haulmount.test_task.dao.repository.LoanOfferRepository;
 import com.haulmount.test_task.service.dto.CalculatedDataAndId;
-import com.haulmount.test_task.service.dto.LoanOfferDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class LoanOfferServiceImpl implements LoanOfferService {
@@ -23,16 +17,18 @@ public class LoanOfferServiceImpl implements LoanOfferService {
     }
 
     @Override
-    public UUID save(CalculatedDataAndId newLoanOffer) {
+    public CalculatedDataAndId save(CalculatedDataAndId newLoanOffer) {
         LoanOffer saveOffer = loanOfferRepository.save(saveDataToDb(newLoanOffer));
-        return saveOffer.getId();
+        newLoanOffer.setLoanOfferId(saveOffer.getId());
+        return newLoanOffer;
+
     }
 
     private LoanOffer saveDataToDb(CalculatedDataAndId newLoanOffer){
         LoanOffer loanOffer = new LoanOffer();
         loanOffer.setCustomerId(newLoanOffer.getCustomerId());
         loanOffer.setCreditId(newLoanOffer.getCreditId());
-        loanOffer.setCreditAmount(newLoanOffer.getCurrentAmount());
+        loanOffer.setCreditAmount(newLoanOffer.getPrincipal());
         return loanOffer;
     }
 }

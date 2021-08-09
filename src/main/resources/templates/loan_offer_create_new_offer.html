@@ -68,7 +68,7 @@
                 </div>
                 <div>
                     <p th:text="#{Interest.rate}"></p>
-                    <input id="interestRate" type="text"
+                    <input type="text"
                            name="interestRate"
                            th:value="${credit.getInterestRate()}" disabled/>
                 </div>
@@ -92,7 +92,9 @@
             <div class="content-fields">
                 <input id="creditId" type="hidden" name="creditId" th:value="${credit.id}"/>
                 <input id="customerId" type="hidden" name="customerId" th:value="${customer.id}"/>
-                <input id="currentAmount" type="hidden" name="currentAmount" th:value="${credit.creditLimit}"/>
+                <input id="year" type="hidden" name="year" th:value="${year}"/>
+                <input id="principal" type="hidden" name="principal" th:value="${credit.creditLimit}"/>
+                <input id="interestRate" type="hidden" name="interestRate" th:value="${credit.interestRate}"/>
                 <div class="conent-filter-button">
                     <p th:text="#{Action}"></p>
                     <button type="submit" th:text="#{Confirm}"></button>

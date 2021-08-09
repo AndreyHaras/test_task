@@ -13,6 +13,7 @@ public interface PaymentScheduleRepository extends JpaRepository<PaymentSchedule
             "p.monthlyPayment as monthlyPayment, " +
             "p.principalPaid as principalPaid, " +
             "p.interestPaid as interestPaid " +
-            "From PaymentSchedule as p ORDER BY p.dateOfPay")
+            "From PaymentSchedule as p group by dateOfPay, monthlyPayment, principalPaid, interestPaid " +
+            "order by length(dateOfPay) desc ")
     List<PaymentScheduleOrderBy> findAllOrderBy();
 }

@@ -4,6 +4,7 @@ import com.haulmount.test_task.dao.entity.PaymentSchedule;
 import com.haulmount.test_task.dao.entity.PaymentScheduleOrderBy;
 import com.haulmount.test_task.dao.repository.PaymentScheduleRepository;
 import com.haulmount.test_task.service.calculationOfLoanPayment.CalculationOfLoanPayments;
+import com.haulmount.test_task.service.dto.CalculatedDataAndId;
 import com.haulmount.test_task.service.dto.PaymentScheduleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,8 +41,10 @@ public class PaymentScheduleServiceImpl implements PaymentScheduleService {
     }
 
     @Override
-    public void save(UUID loanOfferId) {
-
+    public void save(CalculatedDataAndId loanOffer) {
+        List<PaymentScheduleDTO> dataToDb =
+                calculateCredit(loanOffer.getPrincipal(), loanOffer.getInterestRate(), loanOffer.getYear());
+        saveDataToDb(dataToDb, loanOffer.getLoanOfferId());
     }
 
     private List<PaymentScheduleDTO> createPaymentScheduleList(List<PaymentScheduleOrderBy> paymentSchedules){
@@ -55,5 +58,17 @@ public class PaymentScheduleServiceImpl implements PaymentScheduleService {
             result.add(newPaymentSchedule);
         }
         return result;
+    }
+
+    private void saveDataToDb(List<PaymentScheduleDTO> dataToDb, UUID loanOfferID){
+        for (PaymentScheduleDTO payment : dataToDb){
+            PaymentSchedule paymentSchedule = new PaymentSchedule();
+            paymentSchedule.setLoanOfferId(loanOfferID);
+            paymentSchedule.setDateOfPay(payment.getDateOfPay());
+            paymentSchedule.setMonthlyPayment(payment.getMonthlyPayment());
+            paymentSchedule.setInterestPaid(payment.getInterestPaid());
+            paymentSchedule.setPrincipalPaid(payment.getPrincipalPaid());
+            repository.save(paymentSchedule);
+        }
     }
 }

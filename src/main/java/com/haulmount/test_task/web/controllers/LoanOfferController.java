@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/loan_offer")
@@ -68,13 +67,14 @@ public class LoanOfferController {
         model.addAttribute("calculation_credit", calculationCredit);
         model.addAttribute("credit", creditFromDb);
         model.addAttribute("loan_processing",loanProcessing);
+        model.addAttribute("year", newLoanOffer.getNumberOfYears());
         return "loan_offer_create_new_offer";
     }
 
     @RequestMapping(value = "/create_new/", method = RequestMethod.POST)
     public String createNewLoanAgreement(@ModelAttribute("loan_processing") CalculatedDataAndId loanProcessing){
-        UUID loanOfferId = loanOfferService.save(loanProcessing);
-        
-        return "redirect:/loan_offer/";
+        CalculatedDataAndId loanOfferId = loanOfferService.save(loanProcessing);
+        paymentScheduleService.save(loanOfferId);
+        return "redirect:/payment_schedule/";
     }
 }
