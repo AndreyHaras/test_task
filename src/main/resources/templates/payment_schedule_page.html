@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title th:text="#{PaymentSchedule}"></title>
+    <link rel="stylesheet" href="/test_task_project.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <nav class="header-nav">
+            <div class="header-logo">
+                <h3 th:text="#{PaymentSchedule}"></h3>
+            </div>
+            <ul class="header-nav-list">
+                <li>
+                    <a th:href="@{/bank/}" th:text="#{Bank}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/credit/}" th:text="#{Credit}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/}" th:text="#{Customer}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/loan_offer/}" th:text="#{LoanOffer}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/payment_schedule/}" th:text="#{PaymentSchedule}"></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <br/>
+    <div class="content-table">
+        <br/>
+    </div>
+    <div class="content-table">
+        <div class="content-header">
+            <h2 th:text="#{Payment.schedule.information}"></h2>
+        </div>
+        <table>
+            <thead>
+            <th th:text="#{Payment.date.of.pay}"></th>
+            <th th:text="#{Payment.monthly.payment}"></th>
+            <th th:text="#{Payment.interest.paid}"></th>
+            <th th:text="#{Payment.principal.paid}"></th>
+            </thead>
+            <tbody th:each="payment : ${payments}">
+            <td th:utext="${payment.getDateOfPay()}"></td>
+            <td th:utext="${payment.getMonthlyPayment()}"></td>
+            <td th:utext="${payment.getInterestPaid()}"></td>
+            <td th:utext="${payment.getPrincipalPaid()}"></td>
+            </tbody>
+        </table>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <p th:text="#{Footer}"></p>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

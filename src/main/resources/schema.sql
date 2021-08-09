@@ -25,7 +25,7 @@ CREATE TABLE loan_offer(
                         id UUID NOT NULL,
                         uuid_customer UUID NOT NULL REFERENCES customer(id),
                         uuid_credit UUID NOT NULL REFERENCES credit(id),
-                        credit_amount decimal(14,4) NOT NULL,
+                        credit_amount VARCHAR(20) NOT NULL,
                         PRIMARY KEY (id)
 );
 
@@ -59,8 +59,8 @@ VALUES ('8gg3defc-4f22-4d02-b0f9-43cf3323270b', '1b50843d-9771-4351-9860-d3bc880
        ('5b50843d-9771-4351-9ff0-d3bc8800573a', '70518da5-3b69-4251-a3c9-ded1d6f80abf', '8aa3defc-4f82-4402-b0f9-43cf2123270b');
 
 INSERT INTO loan_offer (id, uuid_customer, uuid_credit, credit_amount)
-VALUES ('8gg3defc-4f22-4d02-b0f9-43cf3hg3270b', '1b50843d-9771-4351-9860-d3bc8800573a', '34118da5-3b69-2209-a3c9-ded1dgf80abf', 350000),
-       ('5b50843d-9771-4aa1-9ff0-d3bc8800573a', '70518da5-3b69-4251-a3c9-ded1d6f80abf', '8aa3defc-4f82-4402-b0f9-43cf2123270b', 800000);
+VALUES ('8gg3defc-4f22-4d02-b0f9-43cf3hg3270b', '1b50843d-9771-4351-9860-d3bc8800573a', '34118da5-3b69-2209-a3c9-ded1dgf80abf', '350000'),
+       ('5b50843d-9771-4aa1-9ff0-d3bc8800573a', '70518da5-3b69-4251-a3c9-ded1d6f80abf', '8aa3defc-4f82-4402-b0f9-43cf2123270b', '800000');
 
 INSERT INTO payment_schedule(id, loan_offer_id, date_of_pay, monthly_payment, principal_paid, interest_paid)
 VALUES ('2694a019-9502-4f89-9788-fd30fba46b96','8gg3defc-4f22-4d02-b0f9-43cf3hg3270b','2021-08-08','5737,49','5398,68', '338,81'),

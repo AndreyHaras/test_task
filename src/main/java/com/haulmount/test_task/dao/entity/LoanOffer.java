@@ -25,7 +25,7 @@ public class LoanOffer {
     private UUID creditId;
 
     @Column(name = "credit_amount")
-    private double CreditAmount;
+    private String CreditAmount;
 
     @OneToMany(mappedBy = "loanOffer", fetch = FetchType.LAZY)
     private List<PaymentSchedule> paymentSchedules;
@@ -67,11 +67,11 @@ public class LoanOffer {
         this.creditId = creditId;
     }
 
-    public double getCreditAmount() {
+    public String getCreditAmount() {
         return CreditAmount;
     }
 
-    public void setCreditAmount(double creditAmount) {
+    public void setCreditAmount(String creditAmount) {
         CreditAmount = creditAmount;
     }
 

@@ -1,4 +1,4 @@
-package com.haulmount.test_task.service;
+package com.haulmount.test_task.service.calculationOfLoanPayment;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -32,7 +32,7 @@ public class CalculationOfLoanPayments {
         resuilList.put("monthlyPayment",
                 new ArrayList<>(Arrays.asList(decimalFormat.format(monthlyPayment))));
         resuilList.put("totalPayment",
-                new ArrayList<>(Arrays.asList(decimalFormat.format(decimalFormat.format(monthlyPayment)))));
+                new ArrayList<>(Arrays.asList(decimalFormat.format(decimalFormat.format(monthlyPayment*totalMonths)))));
 
         System.out.format("Monthly Payment: %8.2f%n", monthlyPayment);
         System.out.format("Total Payment:   %8.2f%n", monthlyPayment*totalMonths);

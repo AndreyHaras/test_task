@@ -1,4 +1,4 @@
-package com.haulmount.test_task.service;
+package com.haulmount.test_task.service.calculationOfLoanPayment;
 
 import java.util.Calendar;
 import java.util.Date;
