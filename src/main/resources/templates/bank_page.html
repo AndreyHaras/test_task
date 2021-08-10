@@ -44,7 +44,7 @@
                 <div>
                     <p th:text="#{Chose.Customer}"></p>
                     <p th:if="${#fields.hasErrors('customerId')}" th:class="${#fields.hasErrors('customerId')} ? error"
-                       th:errors="*{customerId}">Error</p>
+                       th:errors="*{customerId}"></p>
                     <select id="customerId" name="customerId">
                         <option th:each="customer : ${customer_list}"
                                 th:value="${customer.getId()}"
@@ -55,7 +55,7 @@
                 <div>
                     <p th:text="#{Chose.Credit}"></p>
                     <p th:if="${#fields.hasErrors('creditId')}" th:class="${#fields.hasErrors('creditId')} ? error"
-                       th:errors="*{creditId}">Error</p>
+                       th:errors="*{creditId}"></p>
                     <select id="creditId" name="creditId">
                         <option th:each="credit : ${credit_list}"
                                 th:value="${credit.getId()}"

@@ -44,7 +44,7 @@
                 <div>
                     <p th:text="#{Enter.credit.limit}"></p>
                     <p th:if="${#fields.hasErrors('creditLimit')}" th:class="${#fields.hasErrors('creditLimit')} ? error"
-                       th:errors="*{creditLimit}">Error</p>
+                       th:errors="*{creditLimit}"></p>
                     <input id="creditLimit" type="text"
                            name="creditLimit"
                            th:value="${new_credit.creditLimit}"/>
@@ -52,7 +52,7 @@
                 <div>
                     <p th:text="#{Enter.interest.rate}"></p>
                     <p th:if="${#fields.hasErrors('interestRate')}" th:class="${#fields.hasErrors('interestRate')} ? error"
-                       th:errors="*{interestRate}">Error</p>
+                       th:errors="*{interestRate}"></p>
                     <input id="interestRate" type="text"
                            name="interestRate"
                            th:value="${new_credit.interestRate}"/>

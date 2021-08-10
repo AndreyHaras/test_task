@@ -44,7 +44,7 @@
                 <div>
                     <p th:text="#{Enter.your.fully.aualified.name}"></p>
                     <p th:if="${#fields.hasErrors('fullyQualifiedName')}" th:class="${#fields.hasErrors('fullyQualifiedName')} ? error"
-                       th:errors="*{fullyQualifiedName}">Error</p>
+                       th:errors="*{fullyQualifiedName}"></p>
                     <input id="fullyQualifiedName" type="text"
                            name="fullyQualifiedName"
                            th:value="${new_customer.fullyQualifiedName}"/>
@@ -52,7 +52,7 @@
                 <div>
                     <p th:text="#{Enter.your.phone.number}"></p>
                     <p th:if="${#fields.hasErrors('phoneNumber')}" th:class="${#fields.hasErrors('phoneNumber')} ? error"
-                       th:errors="*{phoneNumber}">Error</p>
+                       th:errors="*{phoneNumber}"></p>
                     <input id="phoneNumber" type="text"
                            name="phoneNumber"
                            th:value="${new_customer.phoneNumber}"/>
@@ -60,7 +60,7 @@
                 <div>
                     <p th:text="#{Enter.email}"></p>
                     <p th:if="${#fields.hasErrors('email')}" th:class="${#fields.hasErrors('email')} ? error"
-                       th:errors="*{email}">Error</p>
+                       th:errors="*{email}"></p>
                     <input id="email" type="text"
                            name="email"
                            th:value="${new_customer.email}"/>
@@ -68,7 +68,7 @@
                 <div>
                     <p th:text="#{Enter.passport.number}"></p>
                     <p th:if="${#fields.hasErrors('passportNumber')}" th:class="${#fields.hasErrors('passportNumber')} ? error"
-                       th:errors="*{passportNumber}">Error</p>
+                       th:errors="*{passportNumber}"></p>
                     <input id="passportNumber" type="text"
                            name="passportNumber"
                            th:value="${new_customer.passportNumber}"/>

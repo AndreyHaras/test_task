@@ -38,7 +38,7 @@ CREATE TABLE payment_schedule(
                         interest_paid VARCHAR(20) NOT NULL,
                         PRIMARY KEY (id)
 
-)
+);
 
 INSERT INTO CUSTOMER (id, fully_qualified_name, phone_number, email, passport_number)
 VALUES ('14878326-b111-42bf-a553-f74dd0bc0fa3', 'Иванов Александр Александрович', '89371876532', 'IvanovAlex@mail.com', '6678900456'),
