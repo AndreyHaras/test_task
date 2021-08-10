@@ -27,15 +27,15 @@ public class LoanOffer {
     @Column(name = "credit_amount")
     private String CreditAmount;
 
-    @OneToMany(mappedBy = "loanOffer", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "loanOffer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PaymentSchedule> paymentSchedules;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "uuid_customer",
             referencedColumnName = "id", insertable = false,updatable = false)
     private Customer customer;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "uuid_credit",
             referencedColumnName = "id", insertable = false, updatable = false)
     private Credit credit;

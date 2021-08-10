@@ -3,6 +3,7 @@ package com.haulmount.test_task.web.controllers;
 import com.haulmount.test_task.service.BankService;
 import com.haulmount.test_task.service.CreditService;
 import com.haulmount.test_task.service.CustomerService;
+import com.haulmount.test_task.service.LoanOfferService;
 import com.haulmount.test_task.service.dto.BankDTO;
 import com.haulmount.test_task.service.dto.CreditDTO;
 import com.haulmount.test_task.service.dto.CustomerDTO;
@@ -25,6 +26,7 @@ public class BankController {
     private BankService bankService;
     private CustomerService customerService;
     private CreditService creditService;
+    private LoanOfferService loanOfferService;
 
     @Autowired
     public void setService(BankService service) {
@@ -39,6 +41,16 @@ public class BankController {
     @Autowired
     public void setCreditService(CreditService creditService) {
         this.creditService = creditService;
+    }
+
+    @Autowired
+    public void setLoanOfferService(LoanOfferService loanOfferService) {
+        this.loanOfferService = loanOfferService;
+    }
+
+    @Autowired
+    public void setBankService(BankService bankService) {
+        this.bankService = bankService;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -72,6 +84,7 @@ public class BankController {
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String bankDelete(@PathVariable("id") UUID bankId){
+        loanOfferService.deleteCreditRecord(bankId);
         bankService.delete(bankId);
         return "redirect:/bank/";
     }
