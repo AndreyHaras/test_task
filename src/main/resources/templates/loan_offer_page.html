@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title th:text="#{LoanOffer}"></title>
+    <link rel="stylesheet" href="/project_test_task.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <nav class="header-nav">
+            <div class="header-logo">
+                <h3 th:text="#{LoanOffer}"></h3>
+            </div>
+            <ul class="header-nav-list">
+                <li>
+                    <a th:href="@{/bank/}" th:text="#{Bank}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/credit/}" th:text="#{Credit}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/}" th:text="#{Customer}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/loan_offer/}" th:text="#{LoanOffer}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/payment_schedule/}" th:text="#{PaymentSchedule}"></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <br/>
+    <div class="content-table">
+        <div class="content-header">
+            <h2 th:text="#{New.loan.offer}"></h2>
+        </div>
+        <br/>
+        <form th:action="@{/loan_offer/add/}" method="POST" class="content-add" th:object="${new_loan_offer}">
+            <div class="content-fields">
+                <div>
+                    <p th:text="#{Chose.customer.fully.name}"></p>
+                    <select id="customerId" name="customerId">
+                        <option th:each="customer : ${customers}"
+                                th:value="${customer.getId()}"
+                                th:text="${customer.getFullyQualifiedName()}"
+                                th:selected="${customer.id == new_loan_offer.customerId}"></option>
+                    </select>
+                </div>
+                <div>
+                    <p th:text="#{Chose.credit.offer}"></p>
+                    <select id="creditId" name="creditId">
+                        <option th:each="credit : ${credits}"
+                                th:value="${credit.getId()}"
+                                th:text="${credit.getCreditLimit()}"
+                                th:selected="${credit.id == new_loan_offer.creditId}"></option>
+                    </select>
+                </div>
+                <div>
+                    <p th:text="#{Chose.year.of.credit}"></p>
+                    <select id="numberOfYears" name="numberOfYears">
+                        <option th:each="year : ${years_of_credit}"
+                                th:value="${year.getNumberOfYears()}"
+                                th:text="${year.getNumberOfYears()}"
+                                th:selected="${year.getNumberOfYears() == new_loan_offer.numberOfYears}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="content-fields">
+                <div class="conent-filter-button">
+                    <p th:text="#{Action}"></p>
+                    <button type="submit" th:text="#{Add}"></button>
+                    <button th:type="reset" th:text="#{Remove}"></button>
+                </div>
+            </div>
+        </form>
+        <br/>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <p th:text="#{Footer}"></p>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

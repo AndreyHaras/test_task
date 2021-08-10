@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title th:text="#{New.credit.offer}"></title>
+    <link rel="stylesheet" href="/project_test_task.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <nav class="header-nav">
+            <div class="header-logo">
+                <h3 th:text="#{New.credit.offer}"></h3>
+            </div>
+            <ul class="header-nav-list">
+                <li>
+                    <a th:href="@{/bank/}" th:text="#{Bank}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/credit/}" th:text="#{Credit}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/}" th:text="#{Customer}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/loan_offer/}" th:text="#{LoanOffer}"></a>
+                </li>
+                <li>
+                    <a th:href="@{/payment_schedule/}" th:text="#{PaymentSchedule}"></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <br/>
+    <div class="content-table">
+        <div class="content-header">
+            <h2 th:text="#{Check.insert.data}"></h2>
+        </div>
+        <br/>
+            <div class="content-fields">
+                <div>
+                    <p th:text="#{fully.qualified.name}"></p>
+                    <input id="fullyQualifiedName" type="text"
+                           name="fullyQualifiedName"
+                           th:value="${customer.getFullyQualifiedName()}" disabled/>
+                </div>
+                <div>
+                    <p th:text="#{Phone.number}"></p>
+                    <input id="phoneNumber" type="text"
+                           name="phoneNumber"
+                           th:value="${customer.getPhoneNumber()}" disabled/>
+                </div>
+                <div>
+                    <p th:text="#{Passport.number}"></p>
+                    <input id="passportNumber" type="text"
+                           name="passportNumber"
+                           th:value="${customer.getPassportNumber()}" disabled/>
+                </div>
+            </div>
+            <div class="content-fields">
+                <div>
+                    <p th:text="#{Amount.of.credit}"></p>
+                    <input id="creditLimit" type="text"
+                           name="creditLimit"
+                           th:value="${credit.getCreditLimit()}" disabled/>
+                </div>
+                <div>
+                    <p th:text="#{Interest.rate}"></p>
+                    <input type="text"
+                           name="interestRate"
+                           th:value="${credit.getInterestRate()}" disabled/>
+                </div>
+            </div>
+        <br/>
+    </div>
+    <div class="content-table">
+        <div class="content-fields">
+            <div>
+                <p th:text="#{Monthly.payment}"></p>
+                <input type="text"
+                       th:value="${calculation_credit.get(0)?.getMonthlyPayment()}" disabled/>
+            </div>
+            <div>
+                <p th:text="#{Total.payment}"></p>
+                <input type="text"
+                       th:value="${calculation_credit.get(0)?.getTotalPayment()}" disabled/>
+            </div>
+        </div>
+        <form th:action="@{/loan_offer/create_new/}" method="POST" class="content-add" th:object="${loan_processing}">
+            <div class="content-fields">
+                <input id="creditId" type="hidden" name="creditId" th:value="${credit.id}"/>
+                <input id="customerId" type="hidden" name="customerId" th:value="${customer.id}"/>
+                <input id="year" type="hidden" name="year" th:value="${year}"/>
+                <input id="principal" type="hidden" name="principal" th:value="${credit.creditLimit}"/>
+                <input id="interestRate" type="hidden" name="interestRate" th:value="${credit.interestRate}"/>
+                <div class="conent-filter-button">
+                    <p th:text="#{Action}"></p>
+                    <button type="submit" th:text="#{Confirm}"></button>
+                </div>
+            </div>
+        </form>
+        <br/>
+        <div class="content-table">
+            <div class="content-header">
+                <h2 th:text="#{Payment.information}"></h2>
+            </div>
+            <table>
+                <thead>
+                <th th:text="#{Date.of.pay}"></th>
+                <th th:text="#{Interest.paid}"></th>
+                <th th:text="#{Principal.paid}"></th>
+                <th th:text="#{Total.sum}"></th>
+                </thead>
+                <tbody th:each="calculation : ${calculation_credit}">
+                <td th:utext="${calculation.getDateOfPay()}"></td>
+                <td th:utext="${calculation.getInterestPaid()}"></td>
+                <td th:utext="${calculation.getPrincipalPaid()}"></td>
+                <td th:utext="${calculation.getTotalSum()}"></td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <p th:text="#{Footer}"></p>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
