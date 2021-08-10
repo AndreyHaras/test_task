@@ -1,10 +1,7 @@
 package com.haulmount.test_task.web.controllers;
 
 import com.haulmount.test_task.dao.entity.YearsOfCredit;
-import com.haulmount.test_task.service.CreditService;
-import com.haulmount.test_task.service.CustomerService;
-import com.haulmount.test_task.service.LoanOfferService;
-import com.haulmount.test_task.service.PaymentScheduleService;
+import com.haulmount.test_task.service.*;
 import com.haulmount.test_task.service.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +19,7 @@ public class LoanOfferController {
     private CreditService creditService;
     private LoanOfferService loanOfferService;
     private PaymentScheduleService paymentScheduleService;
+    private BankService bankService;
 
     @Autowired
     public void setCustomerService(CustomerService customerService) {
@@ -41,6 +39,11 @@ public class LoanOfferController {
     @Autowired
     public void setPaymentScheduleService(PaymentScheduleService paymentScheduleService) {
         this.paymentScheduleService = paymentScheduleService;
+    }
+
+    @Autowired
+    public void setBankService(BankService bankService) {
+        this.bankService = bankService;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -75,6 +78,7 @@ public class LoanOfferController {
     public String createNewLoanAgreement(@ModelAttribute("loan_processing") CalculatedDataAndId loanProcessing){
         CalculatedDataAndId loanOfferId = loanOfferService.save(loanProcessing);
         paymentScheduleService.save(loanOfferId);
+        bankService.saveNewLoanOffer(loanOfferId);
         return "redirect:/payment_schedule/";
     }
 }

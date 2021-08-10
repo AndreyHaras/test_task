@@ -43,24 +43,24 @@
             <div class="content-fields">
                 <div>
                     <p th:text="#{Chose.Customer}"></p>
-                    <p th:if="${#fields.hasErrors('customer_id')}" th:class="${#fields.hasErrors('customer_id')} ? error"
-                       th:errors="*{customer_id}">Error</p>
-                    <select id="customer_id" name="customer_id">
+                    <p th:if="${#fields.hasErrors('customerId')}" th:class="${#fields.hasErrors('customerId')} ? error"
+                       th:errors="*{customerId}">Error</p>
+                    <select id="customerId" name="customerId">
                         <option th:each="customer : ${customer_list}"
                                 th:value="${customer.getId()}"
                                 th:text="${customer.getFullyQualifiedName()}"
-                                th:selected="${customer.id == new_bank.customer_id}"></option>
+                                th:selected="${customer.id == new_bank.customerId}"></option>
                     </select>
                 </div>
                 <div>
                     <p th:text="#{Chose.Credit}"></p>
-                    <p th:if="${#fields.hasErrors('credit_id')}" th:class="${#fields.hasErrors('credit_id')} ? error"
-                       th:errors="*{credit_id}">Error</p>
-                    <select id="credit_id" name="credit_id">
+                    <p th:if="${#fields.hasErrors('creditId')}" th:class="${#fields.hasErrors('creditId')} ? error"
+                       th:errors="*{creditId}">Error</p>
+                    <select id="creditId" name="creditId">
                         <option th:each="credit : ${credit_list}"
                                 th:value="${credit.getId()}"
                                 th:text="${credit.getCreditLimit()}"
-                                th:selected="${credit.id == new_bank.credit_id}"></option>
+                                th:selected="${credit.id == new_bank.creditId}"></option>
                     </select>
                 </div>
             </div>

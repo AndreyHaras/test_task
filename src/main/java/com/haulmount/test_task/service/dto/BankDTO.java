@@ -8,10 +8,10 @@ public class BankDTO {
     private UUID id;
 
     @NotNull
-    private UUID customer_id;
+    private UUID customerId;
 
     @NotNull
-    private UUID credit_id;
+    private UUID creditId;
 
     private CustomerDTO customer;
 
@@ -44,19 +44,19 @@ public class BankDTO {
         this.credit = credit;
     }
 
-    public UUID getCustomer_id() {
-        return customer_id;
+    public UUID getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer_id(UUID customer_id) {
-        this.customer_id = customer_id;
+    public void setCustomerId(UUID customerId) {
+        this.customerId = customerId;
     }
 
-    public UUID getCredit_id() {
-        return credit_id;
+    public UUID getCreditId() {
+        return creditId;
     }
 
-    public void setCredit_id(UUID credit_id) {
-        this.credit_id = credit_id;
+    public void setCreditId(UUID creditId) {
+        this.creditId = creditId;
     }
 }

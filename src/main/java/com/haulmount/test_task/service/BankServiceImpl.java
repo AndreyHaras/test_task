@@ -5,6 +5,7 @@ import com.haulmount.test_task.dao.entity.Credit;
 import com.haulmount.test_task.dao.entity.Customer;
 import com.haulmount.test_task.dao.repository.BankRepository;
 import com.haulmount.test_task.service.dto.BankDTO;
+import com.haulmount.test_task.service.dto.CalculatedDataAndId;
 import com.haulmount.test_task.service.dto.CreditDTO;
 import com.haulmount.test_task.service.dto.CustomerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,13 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    public void save(BankDTO bank) {
-        repository.save(bankToDb(bank));
+    public void saveNewLoanOffer(CalculatedDataAndId loanOfferId) {
+        repository.save(newRecordOfLoanOfferToDb(loanOfferId));
+    }
+
+    @Override
+    public void save(BankDTO bank){
+        repository.save(newBankToDb(bank));
     }
 
     @Override
@@ -50,10 +56,17 @@ public class BankServiceImpl implements BankService {
         return result;
     }
 
-    private Bank bankToDb(BankDTO bank){
+    private Bank newRecordOfLoanOfferToDb(CalculatedDataAndId loanOfferId){
         Bank bankToDb = new Bank();
-        bankToDb.setIdCredit(bank.getCredit_id());
-        bankToDb.setIdCustomer(bank.getCustomer_id());
+        bankToDb.setIdCredit(loanOfferId.getCreditId());
+        bankToDb.setIdCustomer(loanOfferId.getCustomerId());
+        return bankToDb;
+    }
+
+    private Bank newBankToDb(BankDTO bank){
+        Bank bankToDb = new Bank();
+        bankToDb.setIdCredit(bank.getCreditId());
+        bankToDb.setIdCustomer(bank.getCustomerId());
         return bankToDb;
     }
 

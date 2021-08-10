@@ -2,7 +2,6 @@ package com.haulmount.test_task.service.calculationOfLoanPayment;
 
 import com.haulmount.test_task.service.dto.PaymentScheduleDTO;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
