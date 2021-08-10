@@ -2,6 +2,7 @@ package com.haulmount.test_task.dao.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -28,8 +29,8 @@ public class Customer {
     @Column(name = "passport_number", length = 10, nullable = false)
     private String passportNumber;
 
-    @OneToOne(mappedBy = "customer")
-    private Bank bank;
+    @OneToMany(mappedBy = "customer")
+    private List<Bank> bank;
 
     public Customer() {
     }
@@ -74,11 +75,37 @@ public class Customer {
         this.passportNumber = passportNumber;
     }
 
-    public Bank getBank() {
+    public List<Bank> getBank() {
         return bank;
     }
 
-    public void setBank(Bank bank) {
+    public void setBank(List<Bank> bank) {
         this.bank = bank;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Customer customer = (Customer) o;
+
+        if (id != null ? !id.equals(customer.id) : customer.id != null) return false;
+        if (fullyQualifiedName != null ? !fullyQualifiedName.equals(customer.fullyQualifiedName) : customer.fullyQualifiedName != null)
+            return false;
+        if (phoneNumber != null ? !phoneNumber.equals(customer.phoneNumber) : customer.phoneNumber != null)
+            return false;
+        if (email != null ? !email.equals(customer.email) : customer.email != null) return false;
+        return passportNumber != null ? passportNumber.equals(customer.passportNumber) : customer.passportNumber == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (fullyQualifiedName != null ? fullyQualifiedName.hashCode() : 0);
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (passportNumber != null ? passportNumber.hashCode() : 0);
+        return result;
     }
 }

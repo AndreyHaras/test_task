@@ -22,14 +22,12 @@ public class Bank {
     @Column(name = "uuid_credit")
     private UUID idCredit;
 
-    @OneToOne
-    @JoinColumn(name = "uuid_customer",
-            referencedColumnName = "id", insertable = false,updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "uuid_customer", insertable = false,updatable = false)
     private Customer customer;
 
-    @OneToOne
-    @JoinColumn(name = "uuid_credit",
-            referencedColumnName = "id", insertable = false,updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "uuid_credit", insertable = false,updatable = false)
     private Credit credit;
 
     public Bank() {

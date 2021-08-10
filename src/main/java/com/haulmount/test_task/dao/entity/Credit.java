@@ -2,6 +2,7 @@ package com.haulmount.test_task.dao.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -22,8 +23,8 @@ public class Credit {
     @Column(name = "interest_rate", length = 5)
     private String interestRate;
 
-    @OneToOne(mappedBy = "credit")
-    private Bank bank;
+    @OneToMany(mappedBy = "credit")
+    private List<Bank> bank;
 
     public Credit() {
     }
@@ -52,11 +53,11 @@ public class Credit {
         this.interestRate = interestRate;
     }
 
-    public Bank getBank() {
+    public List<Bank> getBank() {
         return bank;
     }
 
-    public void setBank(Bank bank) {
+    public void setBank(List<Bank> bank) {
         this.bank = bank;
     }
 
