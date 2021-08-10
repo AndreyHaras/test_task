@@ -4,6 +4,7 @@ import com.haulmont.test_task.dao.entity.Customer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hamcrest.MatcherAssert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import static org.hamcrest.core.Is.is;
 class CustomerRepositoryTest extends Activeprofile {
     @Autowired
     private CustomerRepository customerRepository;
-
     private static final Logger logger = LogManager.getLogger("CustomerRepositoryTest");
     private static Customer customer;
 
@@ -33,7 +33,7 @@ class CustomerRepositoryTest extends Activeprofile {
     public void fundAllRecordTestConnection(){
         List<Customer> customers = customerRepository.findAll();
         for(Customer customer : customers){
-            logger.info("fundAllRecordTest : " + customer.getFullyQualifiedName() + " " + customer.getEmail());
+            logger.info("fund all record test : " + customer.getFullyQualifiedName() + " " + customer.getEmail());
         }
         MatcherAssert.assertThat(customers.size(), is(6));
     }
@@ -41,7 +41,7 @@ class CustomerRepositoryTest extends Activeprofile {
     @Test
     public void saveCustomerToDb(){
         Customer newCustomer = customerRepository.save(customer);
-        logger.info("saveCustomerToDb :" + newCustomer.getFullyQualifiedName());
+        logger.info("save customer to db :" + newCustomer.getFullyQualifiedName());
         MatcherAssert.assertThat(newCustomer.getFullyQualifiedName(), is("Крюкова Ольга Петровна"));
         MatcherAssert.assertThat(newCustomer.getEmail(), is("IvanovAlex@mail.com"));
     }
@@ -53,5 +53,11 @@ class CustomerRepositoryTest extends Activeprofile {
         logger.info("Save customer :" + newCustomer.getFullyQualifiedName());
         logger.info("find By Id customer :" + customerTestFind.getFullyQualifiedName());
         MatcherAssert.assertThat(customerTestFind.getId(), is(newCustomer.getId()));
+    }
+
+    @Test
+    public void deleteCustomer(){
+        Customer newCustomer = customerRepository.save(customer);
+        Assertions.assertDoesNotThrow(() -> customerRepository.deleteById(newCustomer.getId()));
     }
 }
